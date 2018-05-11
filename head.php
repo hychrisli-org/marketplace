@@ -1,9 +1,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Studio7 - Digital Agency</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <title>Marketplace</title>
+  <meta name="description" content="Assorted Company Products">
+  <meta name="author" content="Chris Li">
 
   <!-- Favicons
       ================================================== -->
