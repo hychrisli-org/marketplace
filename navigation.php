@@ -8,9 +8,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#page-top" class="page-scroll">Home</a></li>
-        <li><a href="#products" class="page-scroll">Portfolio</a></li>
-        <li><a href="#about" class="page-scroll">About</a></li>
+        <li><a href="index.php#page-top" class="page-scroll">Home</a></li>
+        <li><a href="index.php#portfolio" class="page-scroll">Products</a></li>
+        <li><a href="index.php#about" class="page-scroll">About</a></li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->
