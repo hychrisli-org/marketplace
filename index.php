@@ -15,8 +15,8 @@
         <div class="row">
           <div class="intro-text">
             <h1>Welcome to <span class="brand">Marketplace</span></h1>
-            <p>We are a digital agency that loves what we do</p>
-            <a href="#services" class="btn btn-default btn-lg page-scroll">Learn More</a> </div>
+            <p>We are a team of excellent product providers</p>
+            <a href="#portfolio" class="btn btn-default btn-lg page-scroll">Learn More</a> </div>
         </div>
       </div>
     </div>
