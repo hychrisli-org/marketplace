@@ -2,7 +2,6 @@
 include 'lib.php';
 
 extract($_POST);
-print_r($_POST);
 if (!$username || !$password) {
   header("Location: login.php?msg=Fields Cannot Be Empty");
   die();

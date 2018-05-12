@@ -1,6 +1,6 @@
 <?php
 
-function productTile($title, $description, $productUrl, $imgUrl, $company)
+function productTile($title, $description, $productUrl, $imgUrl, $company, $productId)
 {
   $description = trim(preg_replace('/\s+/', ' ', $description));
   print ("
@@ -8,7 +8,7 @@ function productTile($title, $description, $productUrl, $imgUrl, $company)
     <div class=\"col-sm-6 col-md-3 col-lg-3 $company\">
       <div class=\"portfolio-item\">
         <div class=\"hover-bg\"> 
-          <a onclick='toProductPage(\"$title\", \"$description\", \"$productUrl\", \"$imgUrl\")'>
+          <a onclick='toProductPage(\"$title\", \"$description\", \"$productUrl\", \"$imgUrl\", \"$productId\")'>
             <div class=\"hover-text\">
               <h4>$title</h4>
               <small>$description</small> </div>
@@ -41,12 +41,13 @@ function getUsername()
 ?>
 
 <script type="text/javascript">
-  function toProductPage(title, desc, productUrl, imgUrl) {
+  function toProductPage(title, desc, productUrl, imgUrl, productId) {
     const form = document.createElement('form');
     const titleElem = document.createElement('input');
     const descElem = document.createElement('input');
     const productUrlElem = document.createElement('input');
     const imgUrlElem = document.createElement('input');
+    const prodIdElem = document.createElement('input');
 
     form.style.display = "none";
     form.action ='product.php';
@@ -60,21 +61,19 @@ function getUsername()
     productUrlElem.name = 'productUrl';
     imgUrlElem.value = imgUrl;
     imgUrlElem.name = 'imgUrl';
+    prodIdElem.value = productId;
+    prodIdElem.name = 'productId';
 
     form.appendChild(titleElem);
     form.appendChild(descElem);
     form.appendChild(productUrlElem);
     form.appendChild(imgUrlElem);
+    form.appendChild(prodIdElem);
 
     document.body.appendChild(form);
 
     console.log(form);
     form.submit();
-  }
-
-
-  function logout() {
-
   }
 
 </script>

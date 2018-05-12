@@ -18,6 +18,20 @@ CREATE TABLE PRODUCT(
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE REVIEW(
+  reviewId  INT PRIMARY KEY AUTO_INCREMENT,
+  productId SMALLINT,
+  username  VARCHAR(30) NOT NULL,
+  title     VARCHAR(100) NOT NULL,
+  comment   VARCHAR(1000) NOT NULL,
+  reviewTs  DATETIME,
+  FOREIGN KEY (productId) REFERENCES PRODUCT(productId)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO REVIEW (productId, username, title, comment, reviewTs) VALUES (1, 'user1', 'I Love this product', 'Great Quality and amazing details', STR_TO_DATE('2018-05-02 19:45:23', '%Y-%m-%d %H:%i:%s'));
+
+
 INSERT INTO PRODUCT(title,description,productUrl,imgUrl, company) VALUES ('Tsum Tsum Ice Cream Set','スイートなパステルカラーが可愛らしいミニツム&ハウスセットが登場★アイスクリームモチーフのハウスに、ドナルド、デイジー、チップ、デールの4体が入っているよ。ミニツムたちは、ふわふわコスチュームにチョコのようなビーズ、星やハートをトッピング☆頭にコーンの帽子も可愛いね！ツムツムたちと楽しいアイスクリームパーティを♪','http://www.isanlam.net/index.php/tsum-tsum-ice-cream-set/','http://www.isanlam.net/wordpress/wp-content/uploads/2018/04/Q316TM_TSUM_ICE_SET.jpg', 'Tsum');
 INSERT INTO PRODUCT(title,description,productUrl,imgUrl, company) VALUES ('Tsum Tsum Easter Wreath','今年のイースターはキュートなTSUM TSUM～ツムツム～たちと♪ふわふわ、もふもふのうさぎコスチュームに身を包んだミニツムのリースセット。草原のようなグリーン×水玉模様のリースは春らしさ満点♪可愛らしいコスチュームにおちゃめな表情をしたミッキー、ミニー、グーフィー、プルートに会えるのはこのセットだけ！玄関やお部屋に飾ってツムツムと一緒にイースターをお祝いしよう♪','http://www.isanlam.net/index.php/tsum-tsum-easter-wreath/','http://www.isanlam.net/wordpress/wp-content/uploads/2018/04/Q217TM_MINI_TSUM_EAST_SET.jpg', 'Tsum');
 INSERT INTO PRODUCT(title,description,productUrl,imgUrl, company) VALUES ('4th Anniversary Box Set','TSUM TSUM～ツムツム～4周年記念！！豪華なボックスハウスセットが登場♪
