@@ -5,7 +5,7 @@
 <!-- Navigation -->
 <?php
   include 'navigation.php';
-  include 'tile.php';
+  include 'lib.php';
   ?>
 <!-- Header -->
 <header id="header">
@@ -46,7 +46,7 @@
     <div class="row">
       <div class="portfolio-items">
         <?php
-        $sql = "SELECT * FROM PRODUCT";
+        $sql = "SELECT productId, title, description, productUrl, imgUrl, company FROM PRODUCT";
         $DBUSER = getenv('MARKET_DB_USER');
         $DBPASS = getenv('MARKET_DB_PASS');
         $HOST = getenv('MARKET_HOST');
@@ -59,12 +59,13 @@
         $conn->set_charset("utf8");
         $result = $conn -> query($sql);
         while ($row = $result -> fetch_assoc()){
+          $productId = $row["productId"];
           $title = $row["title"];
           $description = $row["description"];
           $productUrl = $row["productUrl"];
           $imgUrl = $row["imgUrl"];
           $company = $row["company"];
-          productTile($title, $description, $productUrl, $imgUrl, $company);
+          productTile($title, $description, $productUrl, $imgUrl, $company, $productId);
         }?>
       </div>
     </div>

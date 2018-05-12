@@ -11,6 +11,14 @@
         <li><a href="index.php#page-top" class="page-scroll">Home</a></li>
         <li><a href="index.php#portfolio" class="page-scroll">Products</a></li>
         <li><a href="index.php#about" class="page-scroll">About</a></li>
+        <?php
+          if (isset($_COOKIE["USER"])){
+            $username =  $_COOKIE["USER"];
+            print ("<li><a href=\"logout.php\">$username | logout</a></li>");
+          }
+          else
+            print ("<li><a href=\"login.php\">Login/Signup</a></li>");
+        ?>
       </ul>
     </div>
     <!-- /.navbar-collapse -->

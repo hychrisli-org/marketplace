@@ -1,11 +1,35 @@
+CREATE TABLE USER(
+
+  userId SMALLINT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(30) NOT NULL UNIQUE,
+  password VARCHAR(100) NOT NULL
+);
+
+INSERT INTO USER (username, password) VALUES('user1', '$2a$10$bNqsANQaxojDrovhLCF2DeaSxXKMA6l1iss/nzzBkS/SdhhtWCPT6');
+
+
 CREATE TABLE PRODUCT(
-  id         SMALLINT PRIMARY KEY AUTO_INCREMENT,
+  productId  SMALLINT PRIMARY KEY AUTO_INCREMENT,
   title      VARCHAR(100) NOT NULL,
   description       VARCHAR(750) NOT NULL,
   productUrl VARCHAR(150) NOT NULL,
   imgUrl     VARCHAR(150) NOT NULL,
   company    VARCHAR(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE REVIEW(
+  reviewId  INT PRIMARY KEY AUTO_INCREMENT,
+  productId SMALLINT,
+  username  VARCHAR(30) NOT NULL,
+  title     VARCHAR(100) NOT NULL,
+  comment   VARCHAR(1000) NOT NULL,
+  reviewTs  DATETIME,
+  FOREIGN KEY (productId) REFERENCES PRODUCT(productId)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO REVIEW (productId, username, title, comment, reviewTs) VALUES (1, 'user1', 'I Love this product', 'Great Quality and amazing details', STR_TO_DATE('2018-05-02 19:45:23', '%Y-%m-%d %H:%i:%s'));
 
 
 INSERT INTO PRODUCT(title,description,productUrl,imgUrl, company) VALUES ('Tsum Tsum Ice Cream Set','スイートなパステルカラーが可愛らしいミニツム&ハウスセットが登場★アイスクリームモチーフのハウスに、ドナルド、デイジー、チップ、デールの4体が入っているよ。ミニツムたちは、ふわふわコスチュームにチョコのようなビーズ、星やハートをトッピング☆頭にコーンの帽子も可愛いね！ツムツムたちと楽しいアイスクリームパーティを♪','http://www.isanlam.net/index.php/tsum-tsum-ice-cream-set/','http://www.isanlam.net/wordpress/wp-content/uploads/2018/04/Q316TM_TSUM_ICE_SET.jpg', 'Tsum');
