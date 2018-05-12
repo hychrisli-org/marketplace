@@ -6,6 +6,8 @@
 <?php
 include 'navigation.php';
 include 'lib.php';
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
 session_start();
 
 if (!isLogin()) {
@@ -35,6 +37,7 @@ if ( isset($_POST['submitReview']) ) {
   $_SESSION['title'] = $title;
   $_SESSION['desc'] = $desc;
 }
+$productUrl = $productUrl."?username=$username";
 
 $DBUSER = getenv('MARKET_DB_USER');
 $DBPASS = getenv('MARKET_DB_PASS');

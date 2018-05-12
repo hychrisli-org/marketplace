@@ -11,6 +11,7 @@
         <li><a href="index.php#page-top" class="page-scroll">Home</a></li>
         <li><a href="index.php#portfolio" class="page-scroll">Products</a></li>
         <li><a href="index.php#about" class="page-scroll">About</a></li>
+        <li><a href="analytics.php">Analytics</a></li>
         <?php
           if (isset($_COOKIE["USER"])){
             $username =  $_COOKIE["USER"];

@@ -14,7 +14,8 @@ CREATE TABLE PRODUCT(
   description       VARCHAR(750) NOT NULL,
   productUrl VARCHAR(150) NOT NULL,
   imgUrl     VARCHAR(150) NOT NULL,
-  company    VARCHAR(20) NOT NULL
+  company    VARCHAR(20) NOT NULL,
+  totVisits  INT DEFAULT 0,
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -28,8 +29,15 @@ CREATE TABLE REVIEW(
   FOREIGN KEY (productId) REFERENCES PRODUCT(productId)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
 INSERT INTO REVIEW (productId, username, title, comment, reviewTs) VALUES (1, 'user1', 'I Love this product', 'Great Quality and amazing details', STR_TO_DATE('2018-05-02 19:45:23', '%Y-%m-%d %H:%i:%s'));
+
+CREATE TABLE VISIT_LOG(
+  logId     BIGINT PRIMARY KEY AUTO_INCREMENT,
+  productId SMALLINT NOT NULL,
+  username  VARCHAR(30),
+  visitTs   DATETIME,
+  FOREIGN KEY (productId) REFERENCES PRODUCT(productId)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 INSERT INTO PRODUCT(title,description,productUrl,imgUrl, company) VALUES ('Tsum Tsum Ice Cream Set','スイートなパステルカラーが可愛らしいミニツム&ハウスセットが登場★アイスクリームモチーフのハウスに、ドナルド、デイジー、チップ、デールの4体が入っているよ。ミニツムたちは、ふわふわコスチュームにチョコのようなビーズ、星やハートをトッピング☆頭にコーンの帽子も可愛いね！ツムツムたちと楽しいアイスクリームパーティを♪','http://www.isanlam.net/index.php/tsum-tsum-ice-cream-set/','http://www.isanlam.net/wordpress/wp-content/uploads/2018/04/Q316TM_TSUM_ICE_SET.jpg', 'Tsum');
