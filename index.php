@@ -5,7 +5,7 @@
 <!-- Navigation -->
 <?php
   include 'navigation.php';
-  include 'tile.php';
+  include 'lib.php';
   ?>
 <!-- Header -->
 <header id="header">

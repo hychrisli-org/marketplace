@@ -2,7 +2,6 @@
 
 function productTile($title, $description, $productUrl, $imgUrl, $company)
 {
-
   $description = trim(preg_replace('/\s+/', ' ', $description));
   print ("
     
@@ -17,7 +16,29 @@ function productTile($title, $description, $productUrl, $imgUrl, $company)
       </div>
     </div>
     ");
-}?>
+}
+
+function setLoginCookie($username)
+{
+  setcookie("USER", $username);
+}
+
+function isLogin()
+{
+  if ( isset($_COOKIE["USER"]))
+    return true;
+  else
+    return false;
+}
+
+function getUsername()
+{
+  if ( isset($_COOKIE["USER"]))
+    return $_COOKIE["USER"];
+  else
+    return null;
+}
+?>
 
 <script type="text/javascript">
   function toProductPage(title, desc, productUrl, imgUrl) {
@@ -27,7 +48,7 @@ function productTile($title, $description, $productUrl, $imgUrl, $company)
     const productUrlElem = document.createElement('input');
     const imgUrlElem = document.createElement('input');
 
-
+    form.style.display = "none";
     form.action ='product.php';
     form.method = 'post';
 
@@ -50,6 +71,12 @@ function productTile($title, $description, $productUrl, $imgUrl, $company)
     console.log(form);
     form.submit();
   }
+
+
+  function logout() {
+
+  }
+
 </script>
 
 
