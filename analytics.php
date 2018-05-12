@@ -1,22 +1,3 @@
-<?php
-
-/*$dataPoints = array(
-  array("x"=> 10, "y"=> 41),
-  array("x"=> 20, "y"=> 35, "indexLabel"=> "Lowest"),
-  array("x"=> 30, "y"=> 50),
-  array("x"=> 40, "y"=> 45),
-  array("x"=> 50, "y"=> 52),
-  array("x"=> 60, "y"=> 68),
-  array("x"=> 70, "y"=> 38),
-  array("x"=> 80, "y"=> 71, "indexLabel"=> "Highest"),
-  array("x"=> 90, "y"=> 52),
-  array("x"=> 100, "y"=> 60),
-  array("x"=> 110, "y"=> 36),
-  array("x"=> 120, "y"=> 49),
-  array("x"=> 130, "y"=> 41)
-);*/
-
-?>
 <!DOCTYPE HTML>
 <html>
 <?php
@@ -33,46 +14,104 @@ if ($conn->connect_error) {
 }
 $conn->set_charset("utf8");
 
-$sql = "SELECT title as label, totVisits as y FROM PRODUCT order by totVisits desc limit 10";
-$result = $conn->query($sql);
-$dataPoints = [];
+function getData($conn, $company)
+{
+  $sql = "SELECT title as label, totVisits as y FROM PRODUCT order by totVisits desc limit 10";
 
-while ($row = $result->fetch_assoc()) {
-  $dataPoints[] = $row;
+  if (isset($company))
+    $sql = "SELECT title as label, totVisits as y FROM PRODUCT where company = '$company' order by totVisits desc limit 10";
+
+  $result = $conn->query($sql);
+  $dataPoints = [];
+
+  while ($row = $result->fetch_assoc()) {
+    $dataPoints[] = $row;
+  }
+
+  return $dataPoints;
 }
+
+$allData = getData($conn, null);
+$tsumData = getData($conn, "Tsum");
+$litemechData = getData($conn, "Litemech");
+$meteoricData = getData($conn, "Meteoric");
+$gameData = getData($conn, "GameSeller");
 
 ?>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <div id="contact" class="text-center">
   <div class="overlay">
     <div class="container">
-      <div class="col-md-8 col-md-offset-2">
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+      <div class="categories">
+        <ul class="cat">
+          <ol class="type">
+            <li><a href="#" onclick="plotAll()" class="active">All</a></li>
+            <li><a href="#" onclick="plotTsum()">Tsum Tsum</a></li>
+            <li><a href="#" onclick="plotLitemech()">Litemech</a></li>
+            <li><a href="#" onclick="plotMeteoric()">Meteoric</a></li>
+            <li><a href="#" onclick="plotGameSeller()">Game Seller</a></li>
+          </ol>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-8 col-md-offset-2 All">
+        <div class="portfolio-item">
+          <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 </body>
 <script>
-  window.onload = function () {
+
+  window.onload = function () {plotAll()};
+
+  function plotAll() {
+    plotChart("Top 10 Marketplace Products", <?php echo json_encode($allData, JSON_NUMERIC_CHECK); ?>);
+  }
+
+  function plotTsum (){
+    plotChart("Top 10 Tsum Tsum Products", <?php echo json_encode($tsumData, JSON_NUMERIC_CHECK); ?>);
+  }
+
+  function plotMeteoric (){
+    plotChart("Top 10 Meteoric Products", <?php echo json_encode($meteoricData, JSON_NUMERIC_CHECK); ?>);
+  }
+
+  function plotLitemech () {
+    plotChart("Top 10 Litemech Products",<?php echo json_encode($litemechData, JSON_NUMERIC_CHECK); ?> )
+  }
+
+  function plotGameSeller () {
+    plotChart("Top 10 GameSeller Products",<?php echo json_encode($gameData, JSON_NUMERIC_CHECK); ?> )
+  }
+
+
+  function plotChart(title, dataPoints){
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: true,
-      theme: "light1", // "light1", "light2", "dark1", "dark2"
-      title:{
-        text: "Total Visits"
+      theme: "dark2", // "light1", "light2", "dark1", "dark2"
+      title: {
+        text: title
+      },
+      axisY: {
+        title: "Page Visits Counts",
+        titleFontColor: "#6D78AD",
+        gridColor: "#6D78AD"
       },
       data: [{
         type: "column", //change type to bar, line, area, pie, etc
         //indexLabel: "{y}", //Shows y value on all Data Points
         indexLabelFontColor: "#5A5757",
         indexLabelPlacement: "outside",
-        dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+        dataPoints: dataPoints
       }]
     });
     chart.render();
-
   }
+
 </script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <?php include 'footer.php'; ?>
