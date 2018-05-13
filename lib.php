@@ -1,5 +1,8 @@
 <?php
 
+define('TIMEZONE', 'US/Pacific');
+date_default_timezone_set(TIMEZONE);
+
 function productTile($title, $description, $productUrl, $imgUrl, $company, $productId)
 {
   $description = trim(preg_replace('/\s+/', ' ', $description));

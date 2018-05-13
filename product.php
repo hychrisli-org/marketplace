@@ -152,6 +152,8 @@ $selectReviewSql = "SELECT title, username, comment, reviewTs, stars FROM REVIEW
   </div>
 </div>
 <?php
+$tz = (new DateTime('now', new DateTimeZone('US/Pacific')))->format('P');
+$conn->query("SET time_zone='$tz';");
 $datetime = date('Y-m-d H:i:s');
 $sql = "INSERT INTO VISIT_LOG(productId, username, visitTs) VALUES($productId,'$username','$datetime');";
 $sql .= "UPDATE PRODUCT SET totVisits = totVisits + 1 where productId = $productId;";
