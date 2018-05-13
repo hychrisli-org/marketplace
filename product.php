@@ -6,7 +6,7 @@
 <?php
 include 'navigation.php';
 include 'lib.php';
-ini_set('session.cache_limiter','public');
+ini_set('session.cache_limiter', 'public');
 session_cache_limiter(false);
 session_start();
 
@@ -16,7 +16,7 @@ if (!isLogin()) {
 
 $username = getUsername();
 
-if ( isset($_POST['submitReview']) ) {
+if (isset($_POST['submitReview'])) {
 
   $reviewTitle = $_POST['reviewTitle'];
   $comment = $_POST['comment'];
@@ -34,11 +34,11 @@ if ( isset($_POST['submitReview']) ) {
   extract($_POST);
   $_SESSION['productId'] = $productId;
   $_SESSION['productUrl'] = $productUrl;
-  $_SESSION['imgUrl'] =$imgUrl;
+  $_SESSION['imgUrl'] = $imgUrl;
   $_SESSION['title'] = $title;
   $_SESSION['desc'] = $desc;
 }
-$productUrl = $productUrl."?username=$username";
+$productUrl = $productUrl . "?username=$username";
 
 $DBUSER = getenv('MARKET_DB_USER');
 $DBPASS = getenv('MARKET_DB_PASS');
@@ -49,20 +49,14 @@ if ($conn->connect_error) {
   die("Connection failed:" . $conn->connect_error);
 }
 $conn->set_charset("utf8");
-if (isset($insertSql)){
-  if ( $conn->query($insertSql) === true ) {
+if (isset($insertSql)) {
+  if ($conn->query($insertSql) === true) {
     $reviewSuccess = "Review Submitted Successfully";
   } else {
     $reviewFail = $conn->error;
   }
 }
 $selectReviewSql = "SELECT title, username, comment, reviewTs, stars FROM REVIEW WHERE productId = $productId ORDER BY reviewTs desc LIMIT 20";
-
-/*$datetime = date('Y-m-d H:i:s');
-$sql = "INSERT INTO VISIT_LOG(productId, username, visitTs) VALUES($productId,'$username','$datetime');";
-$sql .= "UPDATE PRODUCT SET totVisits = totVisits + 1 where productId = $productId;";
-$multi_res = $conn->multi_query($sql);*/
-
 ?>
 
 <!-- Contact Section -->
@@ -84,10 +78,11 @@ $multi_res = $conn->multi_query($sql);*/
     </div>
     <div class="container">
       <div class="col-md-8 col-md-offset-2">
-        <form name="review" id="reviewForm" action="product.php"  method = "post">
+        <form name="review" id="reviewForm" action="product.php" method="post">
           <div class="col-md-8">
             <div class="form-group">
-              <input type="text" id="reviewTitle" name="reviewTitle" class="form-control" placeholder="Review Title" required="required">
+              <input type="text" id="reviewTitle" name="reviewTitle" class="form-control" placeholder="Review Title"
+                     required="required">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -108,7 +103,8 @@ $multi_res = $conn->multi_query($sql);*/
           </div>
           <div class="col-md-12">
             <div class="form-group">
-              <textarea name="comment" id="comment" class="form-control" rows="4" placeholder="Review Comments" required></textarea>
+              <textarea name="comment" id="comment" class="form-control" rows="4" placeholder="Review Comments"
+                        required></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -130,7 +126,7 @@ $multi_res = $conn->multi_query($sql);*/
           $comment = $row['comment'];
           $reviewTs = $row['reviewTs'];
           $stars = $row['stars'];
-          $imgs = array_fill(0,5, "img/star2.png");
+          $imgs = array_fill(0, 5, "img/star2.png");
           for ($i = $stars; $i < 5; $i++)
             $imgs[$i] = "img/star1.png";
 
@@ -155,7 +151,13 @@ $multi_res = $conn->multi_query($sql);*/
     </div>
   </div>
 </div>
-
+<?php
+$datetime = date('Y-m-d H:i:s');
+$sql = "INSERT INTO VISIT_LOG(productId, username, visitTs) VALUES($productId,'$username','$datetime');";
+$sql .= "UPDATE PRODUCT SET totVisits = totVisits + 1 where productId = $productId;";
+$multi_res = $conn->multi_query($sql);
+$conn->close();
+?>
 <?php include 'footer.php'; ?>
 </body>
 </html>

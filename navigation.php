@@ -15,6 +15,7 @@
         <?php
           if (isset($_COOKIE["USER"])){
             $username =  $_COOKIE["USER"];
+            print ("<li><a href=\"track.php\">Track</a></li>");
             print ("<li><a href=\"logout.php\">$username | logout</a></li>");
           }
           else

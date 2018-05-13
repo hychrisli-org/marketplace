@@ -80,7 +80,7 @@ function getUsername()
   {
     var cname="star";
     var ab=document.getElementById(id+"_hidden").value;
-    document.getElementById("rating").innerHTML=ab;
+    document.getElementById("rating").value=ab;
 
     for(var i=ab;i>=1;i--)
     {

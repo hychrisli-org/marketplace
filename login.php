@@ -7,7 +7,6 @@
 include 'navigation.php';
 ?>
 
-<!-- Contact Section -->
 <div id="contact" class="text-center">
   <div class="overlay">
     <div class="container">

@@ -18,7 +18,6 @@ CREATE TABLE PRODUCT(
   totVisits  INT DEFAULT 0,
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE REVIEW(
   reviewId  INT PRIMARY KEY AUTO_INCREMENT,
   productId SMALLINT,
@@ -26,6 +25,7 @@ CREATE TABLE REVIEW(
   title     VARCHAR(100) NOT NULL,
   comment   VARCHAR(1000) NOT NULL,
   reviewTs  DATETIME,
+  stars     TINYINT default 5,
   FOREIGN KEY (productId) REFERENCES PRODUCT(productId)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -38,6 +38,8 @@ CREATE TABLE VISIT_LOG(
   visitTs   DATETIME,
   FOREIGN KEY (productId) REFERENCES PRODUCT(productId)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE INDEX VISIT_TS_INDEX on VISIT_LOG ( visitTs DESC );
 
 
 INSERT INTO PRODUCT(title,description,productUrl,imgUrl, company) VALUES ('Tsum Tsum Ice Cream Set','スイートなパステルカラーが可愛らしいミニツム&ハウスセットが登場★アイスクリームモチーフのハウスに、ドナルド、デイジー、チップ、デールの4体が入っているよ。ミニツムたちは、ふわふわコスチュームにチョコのようなビーズ、星やハートをトッピング☆頭にコーンの帽子も可愛いね！ツムツムたちと楽しいアイスクリームパーティを♪','http://www.isanlam.net/index.php/tsum-tsum-ice-cream-set/','http://www.isanlam.net/wordpress/wp-content/uploads/2018/04/Q316TM_TSUM_ICE_SET.jpg', 'Tsum');
