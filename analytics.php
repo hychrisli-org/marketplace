@@ -101,6 +101,9 @@ $gameData = getData($conn, "GameSeller");
         titleFontColor: "#6D78AD",
         gridColor: "#6D78AD"
       },
+      axisX:{
+        interval: 1
+      },
       data: [{
         type: "column", //change type to bar, line, area, pie, etc
         //indexLabel: "{y}", //Shows y value on all Data Points
