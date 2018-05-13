@@ -66,7 +66,9 @@
           $imgUrl = $row["imgUrl"];
           $company = $row["company"];
           productTile($title, $description, $productUrl, $imgUrl, $company, $productId);
-        }?>
+        }
+        $conn->close();
+        ?>
       </div>
     </div>
   </div>
