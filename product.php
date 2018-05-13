@@ -161,5 +161,23 @@ $multi_res = $conn->multi_query($sql);
 $conn->close();
 ?>
 <?php include 'footer.php'; ?>
+<script type="text/javascript">
+  function changeStars(id)
+  {
+    var cname="star";
+    var ab=document.getElementById(id+"_hidden").value;
+    document.getElementById("rating").value=ab;
+
+    for(var i=ab;i>=1;i--)
+    {
+      document.getElementById(cname+i).src="img/star2.png";
+    }
+    id=parseInt(ab)+1;
+    for(var j=id;j<=5;j++)
+    {
+      document.getElementById(cname+j).src="img/star1.png";
+    }
+  }
+</script>
 </body>
 </html>

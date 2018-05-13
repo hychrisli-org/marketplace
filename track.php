@@ -4,10 +4,12 @@
 <body>
 <!-- Navigation -->
 <?php
-include 'lib.php';
-define('TIMEZONE', 'US/Pacific');
-date_default_timezone_set(TIMEZONE);
 include 'navigation.php';
+include 'lib.php';
+
+if (!isLogin()) {
+  header("Location: login.php?msg=Please Login!&type=ok");
+}
 
 $username = getUsername();
 $DBUSER = getenv('MARKET_DB_USER');
