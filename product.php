@@ -57,6 +57,11 @@ if (isset($insertSql)){
 }
 $selectReviewSql = "SELECT title, username, comment, reviewTs FROM REVIEW WHERE productId = $productId ORDER BY reviewTs desc LIMIT 20";
 
+$datetime = date('Y-m-d H:i:s');
+$sql = "INSERT INTO VISIT_LOG(productId, username, visitTs) VALUES($productId,'$username','$datetime');";
+$sql .= "UPDATE PRODUCT SET totVisits = totVisits + 1 where productId = $productId;";
+$multi_res = $conn->multi_query($sql);
+
 ?>
 
 <!-- Contact Section -->
