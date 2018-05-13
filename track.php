@@ -39,6 +39,7 @@ $selectSql="SELECT p.title, p.productUrl, vl.visitTs FROM VISIT_LOG vl JOIN PROD
         while( $row = $results -> fetch_assoc()) {
           $title = $row['title'];
           $productUrl = $row['productUrl'];
+          $productUrl = $productUrl."?username=".$username;
           $visitTs = $row['visitTs'];
           print ("
             <div class=\"row\">
