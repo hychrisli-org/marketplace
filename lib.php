@@ -2,6 +2,8 @@
 
 define('TIMEZONE', 'US/Pacific');
 date_default_timezone_set(TIMEZONE);
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
 
 function productTile($title, $description, $productUrl, $imgUrl, $company, $productId)
 {
@@ -42,7 +44,6 @@ function getUsername()
     return null;
 }
 ?>
-
 <script type="text/javascript">
   function toProductPage(title, desc, productUrl, imgUrl, productId) {
     const form = document.createElement('form');
@@ -78,25 +79,4 @@ function getUsername()
     console.log(form);
     form.submit();
   }
-
-  function changeStars(id)
-  {
-    var cname="star";
-    var ab=document.getElementById(id+"_hidden").value;
-    document.getElementById("rating").value=ab;
-
-    for(var i=ab;i>=1;i--)
-    {
-      document.getElementById(cname+i).src="img/star2.png";
-    }
-    id=parseInt(ab)+1;
-    for(var j=id;j<=5;j++)
-    {
-      document.getElementById(cname+j).src="img/star1.png";
-    }
-  }
-
 </script>
-
-
-
